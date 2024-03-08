@@ -1,0 +1,40 @@
+.sidebar {
+  background-color: #d0d0d3;
+  padding: 20px;
+  width: 250px;
+}
+
+@media only screen and (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: rgb(77, 77, 77);
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  color: black;
+}
+
+.sidebar ul li.active a {
+  font-weight: normal;
+}
+
+.sidebar ul li a.active {
+  font-weight: bold; 
+  color: #0061b1;
+}

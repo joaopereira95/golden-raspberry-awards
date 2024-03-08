@@ -1,0 +1,60 @@
+.header {
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  display: flex;
+  margin: 0;
+}
+
+@media only screen and (max-width: 900px) {
+  .header-text {
+    display: none;
+  }
+}
+
+.header-text {
+  font-size: 22px;
+  font-weight: normal;
+}
+
+.navbar {
+  display: none;
+}
+
+@media only screen and (max-width: 900px) {
+  .navbar {
+    display: flex;    
+    padding: 0;
+  }
+
+  .navbar ul {
+    list-style-type: none;
+  }
+  
+  .navbar ul li {
+    display: inline-block;
+    margin: 0px 10px;
+  }
+  
+  .navbar ul li a {
+    text-decoration: none;
+    color: rgb(77, 77, 77);
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar ul li a:hover {
+    color: black;
+  }
+  
+  .navbar ul li.active a {
+    font-weight: normal;
+  }
+  
+  .navbar ul li a.active {
+    font-weight: bold; 
+    color: #0061b1;
+  }
+}
+
+
