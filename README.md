@@ -34,4 +34,6 @@ mvn clean package
 java -jar target/golden-raspberry-awards-api-0.0.1-SNAPSHOT.jar  
 
 
-**URL to endpoint:** http://localhost:8080/movies?projection=max-min-win-interval-for-producers
+**URL to endpoint:** http://localhost:8080/movies?projection=max-min-win-interval-for-producers  
+
+**Data folder (movielist.csv):** src/main/resources/movielist.csv
