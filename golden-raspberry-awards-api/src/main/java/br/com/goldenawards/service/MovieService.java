@@ -78,6 +78,7 @@ public class MovieService {
 
         return calculatedData.stream()
                 .filter(data -> data.interval().equals(extremeInterval))
+                .distinct()
                 .collect(Collectors.toList());
     }
 
@@ -88,6 +89,7 @@ public class MovieService {
 	 */
 	private static Map<String, List<Integer>> groupWinnersByYear(List<WinnerProducerPerYear> winnersPerYear) {
 		return winnersPerYear.stream()
+				.sorted(Comparator.comparing(WinnerProducerPerYear::movieYear))
                 .collect(Collectors.groupingBy(WinnerProducerPerYear::producerName,
                         Collectors.mapping(WinnerProducerPerYear::movieYear, Collectors.toList())));
 	}
@@ -116,15 +118,14 @@ public class MovieService {
 		var data = new ArrayList<WinnerProducerData>();
 		
 		var maxIntervalData = calculateInterval(producer, years, WinIntervalCondition.MAX);
-		
-		data.add(maxIntervalData);
+		data.addAll(maxIntervalData);
 		
 		if (years.size() == 2) {
 			return data;
 		}
 		
 		var minIntervalData = calculateInterval(producer, years, WinIntervalCondition.MIN);
-		data.add(minIntervalData);
+		data.addAll(minIntervalData);
 		 
 		return data;
 		
@@ -137,26 +138,37 @@ public class MovieService {
 	 * @param intervalCondition
 	 * @return Min or Max interval data
 	 */
-	private static WinnerProducerData calculateInterval(String producer, List<Integer> years, WinIntervalCondition intervalCondition) {
-        int intervalInitValue = WinIntervalCondition.MIN.equals(intervalCondition) ? Integer.MAX_VALUE : 0;
-        int previousWin = years.get(0);
-        int followingWin = years.get(1);
+	private static List<WinnerProducerData> calculateInterval(String producer, List<Integer> years, WinIntervalCondition intervalCondition) {
+		int intervalInitValue = WinIntervalCondition.MIN.equals(intervalCondition) ? Integer.MAX_VALUE : 0;
+		int previousWin = years.get(0);
+		int followingWin = years.get(1);
+		
+		var result = new ArrayList<WinnerProducerData>();
 
-        for (int i = 1; i < years.size(); i++) {
-            int currentInterval = years.get(i) - years.get(i - 1);
-            
-            boolean condition = WinIntervalCondition.MIN.equals(intervalCondition) 
-            		? currentInterval < intervalInitValue 
-            		: currentInterval > intervalInitValue;
-            		
-            if (condition) {
-                intervalInitValue = currentInterval;
-                previousWin = years.get(i - 1);
-                followingWin = years.get(i);
-            }
-        }
+		for (int i = 1; i < years.size(); i++) {
+			int currentInterval = years.get(i) - years.get(i - 1);
 
-        return new WinnerProducerData(producer, intervalInitValue, previousWin, followingWin);
-    }
-	
+			if ((intervalCondition == WinIntervalCondition.MIN && currentInterval < intervalInitValue)
+			 || (intervalCondition == WinIntervalCondition.MAX && currentInterval > intervalInitValue)) {
+				
+				result.clear();
+				intervalInitValue = currentInterval;
+				previousWin = years.get(i - 1);
+				followingWin = years.get(i);
+				
+				result.add(new WinnerProducerData(producer, intervalInitValue, previousWin, followingWin));
+
+			} else if ((intervalCondition == WinIntervalCondition.MIN && currentInterval == intervalInitValue)
+					|| (intervalCondition == WinIntervalCondition.MAX && currentInterval == intervalInitValue)) {
+				
+				previousWin = years.get(i - 1);
+				followingWin = years.get(i);
+				
+				result.add(new WinnerProducerData(producer, currentInterval, previousWin, followingWin));
+			}
+		}
+
+		return result;
+	}
+
 }
