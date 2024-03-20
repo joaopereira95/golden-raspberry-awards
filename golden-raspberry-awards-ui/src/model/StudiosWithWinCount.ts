@@ -1,8 +1,8 @@
 export interface StudiosWithWinCount {
-    studios: StudioWithWinCount[];
+  studios: StudioWithWinCount[];
 }
 
 interface StudioWithWinCount {
-    name: string;
-    winCount: number;
+  name: string;
+  winCount: number;
 }

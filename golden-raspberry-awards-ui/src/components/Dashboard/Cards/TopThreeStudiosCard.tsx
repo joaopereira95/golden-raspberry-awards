@@ -13,21 +13,23 @@ interface Props {
  * @param studiosWithWinCount
  * @returns TopThreeStudiosCard component
  */
-const TopThreeStudiosCard = ({studiosWithWinCount}: Props) => {
+const TopThreeStudiosCard = ({ studiosWithWinCount }: Props) => {
   if (studiosWithWinCount) {
-    studiosWithWinCount.studios = studiosWithWinCount.studios.sort((studioA, studioB) => studioB.winCount - studioA.winCount).slice(0, 3);
+    studiosWithWinCount.studios = studiosWithWinCount.studios
+      .sort((studioA, studioB) => studioB.winCount - studioA.winCount)
+      .slice(0, 3);
   }
 
   return (
-    <Card title="Top 3 studios with winners" className='card'>
-      { studiosWithWinCount && studiosWithWinCount.studios &&
-          <DataTable value={studiosWithWinCount.studios} showGridlines stripedRows size='small'>
-              <Column  field="name" header="Name" style={{ width: '50%' }}></Column>
-              <Column field="winCount" header="Win Count" style={{ width: '50%' }}></Column>
-          </DataTable>
-      } 
+    <Card title="Top 3 studios with winners" className="card">
+      {studiosWithWinCount && studiosWithWinCount.studios && (
+        <DataTable value={studiosWithWinCount.studios} showGridlines stripedRows size="small">
+          <Column field="name" header="Name" style={{ width: "50%" }}></Column>
+          <Column field="winCount" header="Win Count" style={{ width: "50%" }}></Column>
+        </DataTable>
+      )}
     </Card>
   );
-}
+};
 
 export default TopThreeStudiosCard;

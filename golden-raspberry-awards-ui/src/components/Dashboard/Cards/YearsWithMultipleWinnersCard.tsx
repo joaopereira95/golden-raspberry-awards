@@ -15,15 +15,15 @@ interface Props {
  */
 const YearsWithMultipleWinnersCard = ({ multipleWinners }: Props) => {
   return (
-    <Card title="List years with multiple winners" className='card'>
-      { multipleWinners && multipleWinners.years &&
-        <DataTable value={multipleWinners.years} showGridlines stripedRows size='small' id='yearsWithMultipleWinners'>
-            <Column field="year" header="Year" style={{ width: '50%' }}></Column>
-            <Column field="winnerCount" header="Winner Count" style={{ width: '50%' }}></Column>
+    <Card title="List years with multiple winners" className="card">
+      {multipleWinners && multipleWinners.years && (
+        <DataTable value={multipleWinners.years} showGridlines stripedRows size="small" id="yearsWithMultipleWinners">
+          <Column field="year" header="Year" style={{ width: "50%" }}></Column>
+          <Column field="winnerCount" header="Win Count" style={{ width: "50%" }}></Column>
         </DataTable>
-      } 
+      )}
     </Card>
   );
-}
+};
 
 export default YearsWithMultipleWinnersCard;

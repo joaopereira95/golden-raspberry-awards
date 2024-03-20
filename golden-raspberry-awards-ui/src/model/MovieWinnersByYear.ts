@@ -1,6 +1,6 @@
 export interface MovieWinnerByYear {
-    id: number;
-    year: number;
-    title: string;
-    winner: boolean;
+  id: number;
+  year: number;
+  title: string;
+  winner: boolean;
 }

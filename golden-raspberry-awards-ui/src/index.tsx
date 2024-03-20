@@ -1,22 +1,20 @@
 /** React imports */
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes,  Route} from 'react-router-dom';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 /** Custom imports */
-import Header from './layout/Header/Header';
-import Sidebar from './layout/Sidebar/Sidebar';
-import Dashboard from './components/Dashboard/Dashboard';
-import List from './components/List/List';
+import Header from "./layout/Header/Header";
+import Sidebar from "./layout/Sidebar/Sidebar";
+import Dashboard from "./components/Dashboard/Dashboard";
+import List from "./components/List/List";
 
 /** CSS imports */
-import './index.css';
+import "./index.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
-import 'primeicons/primeicons.css';
-import { PrimeReactProvider } from 'primereact/api';
+import "primeicons/primeicons.css";
+import { PrimeReactProvider } from "primereact/api";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <PrimeReactProvider>
     <div className="body">
@@ -25,13 +23,13 @@ root.render(
         <div className="container">
           <Sidebar />
           <div className="content">
-          <Routes>
-            <Route path={'/'} element={<Dashboard />} />
-            <Route path={'/list'} element={<List />} />
-          </Routes>
+            <Routes>
+              <Route path={"/"} element={<Dashboard />} />
+              <Route path={"/list"} element={<List />} />
+            </Routes>
           </div>
         </div>
-    </BrowserRouter>
+      </BrowserRouter>
     </div>
   </PrimeReactProvider>
 );
